@@ -1,0 +1,35 @@
+
+.contact-form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+	background-image: url(Gulai\ Asam\ Pedas\ Ikan\ Patin.jpg);
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-control {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border: none;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn-primary:hover {
+	background-color: #0069d9;
+}

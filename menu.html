@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang Belanja</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+      :root {
+        --primary: rgb(57, 233, 63);
+        --bg: #010101;
+        --white: #ffffff;
+      }
+
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.4rem 7%;
+        background-color: rgb(81, 102, 219);
+        border-bottom: 1px solid #eee;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+      }
+      .navbar .navbar-logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #eee;
+        font-style: italic;
+      }
+
+      /* Keranjang Item */
+      #cart {
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a class="navbar-logo">Toko<span>Senyum</span></a>
+    </nav>
+
+    <h1>Keranjang Belanja</h1>
+
+    <div id="menu">
+      <h2>Menu Makanan</h2>
+      <ul>
+        <li>
+          Arsik ikan mas- Rp 40.000
+          <button onclick="addItem('Arsik ikan mas', 40000)">
+            Tambahkan ke Keranjang
+          </button>
+        </li>
+        <li>
+          Ayam betutu - Rp 45.000
+          <button onclick="addItem('Ayam betutu', 45000)">
+            Tambahkan ke Keranjang
+          </button>
+        </li>
+        <!-- Tambahkan makanan lainnya -->
+      </ul>
+    </div>
+
+    <div id="cart">
+      <h2>Keranjang Belanja</h2>
+      <ul id="cart-items">
+        <!-- Keranjang akan tampil di sini -->
+      </ul>
+      <button id="checkout">Checkout</button>
+    </div>
+
+    <script>
+      // Keranjang
+      let cart = [];
+
+      function addItem(name, price) {
+        // Tambahkan item ke keranjang
+        cart.push({ name: name, price: price });
+        updateCart();
+      }
+
+      function updateCart() {
+        // Tampilkan item dalam keranjang
+        const cartItemsContainer = document.getElementById("cart-items");
+        cartItemsContainer.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} - Rp ${item.price.toLocaleString()}`;
+          cartItemsContainer.appendChild(li);
+          total += item.price;
+        });
+
+        // Menampilkan total harga
+        const totalLi = document.createElement("li");
+        totalLi.textContent = `Total: Rp ${total.toLocaleString()}`;
+        cartItemsContainer.appendChild(totalLi);
+      }
+
+      // Mengirim data keranjang ke server (PHP) menggunakan AJAX
+      $(document).ready(function () {
+        $("#checkout").click(function () {
+          $.ajax({
+            url: "process_cart.php",
+            method: "POST",
+            data: { cart: JSON.stringify(cart) },
+            success: function (response) {
+              alert("Checkout berhasil");
+              console.log(response);
+            },
+            error: function (error) {
+              alert("Ada masalah saat checkout");
+              console.log(error);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
