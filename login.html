@@ -1,98 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LOGIN</title>
-    <link rel="stylesheet" href="login.css" />
+    <title>Halaman Login</title>
     <style>
-      body {
+      /* Reset dan pengaturan dasar */
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #0f0f0f;
-        background-size: cover; /* Make the background cover the entire page */
-        background-position: center; /* Center the background */
+        margin: 0;
       }
 
-      .form-container {
-        text-align: center;
-        background-color: rgba(
-          255,
-          255,
-          255,
-          0.8
-        ); /* Make the background semi-transparent */
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px; /* Set a fixed width for the form container */
-      }
-
-      input[type="text"],
-      input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-      }
-
-      button[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-      }
-
-      button[type="submit"]:hover {
-        background-color: #0056b3;
+      .login-container {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 300px;
       }
 
       h2 {
-        font-size: 24px;
+        text-align: center;
         margin-bottom: 20px;
+        color: #333;
       }
 
-      p {
+      .input-field {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
         font-size: 14px;
       }
 
-      a {
-        color: #007bff;
+      .input-field:focus {
+        border-color: #0056b3;
+        outline: none;
       }
 
-      a:hover {
+      .login-button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .login-button:hover {
+        background-color: #0056b3;
+      }
+
+      .forgot-password {
+        text-align: left;
+        margin-top: 10px;
+      }
+
+      .forgot-password a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .forgot-password a:hover {
         text-decoration: underline;
       }
     </style>
   </head>
   <body>
-    <div class="form-container">
-      <h2>LOGIN</h2>
-      <form method="post" action="login.php">
+    <div class="login-container">
+      <h2>Login</h2>
+      <form action="menu.html" method="POST">
         <input
           type="text"
+          class="input-field"
           name="username"
           placeholder="Username"
           required
-        /><br />
+        />
         <input
           type="password"
+          class="input-field"
           name="password"
           placeholder="Password"
           required
-        /><br />
-        <button type="submit">Login</button>
-        <p>Don't have an account? <a href="register.html">Register</a></p>
+        />
+        <button type="submit" class="login-button">Login</button>
       </form>
+      <div class="forgot-password">
+        <a href="#">Lupa Password?</a>
+        <a href="registrasi.html">registrasi</a>
+      </div>
     </div>
   </body>
 </html>
