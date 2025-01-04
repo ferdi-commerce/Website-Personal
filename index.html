@@ -14,7 +14,7 @@
     />
 
     <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://unpkg.com/feather-icons" defer></script>
 
     <style>
       :root {
@@ -68,13 +68,6 @@
         color: var(--primary);
       }
 
-      .navbar .navbar-nav a {
-        color: #fffff;
-        display: inline-block;
-        font-size: 1.4rem;
-        margin: 0 1rem;
-      }
-
       .navbar .navbar-nav a:hover {
         color: var(--primary);
       }
@@ -93,7 +86,7 @@
       }
 
       .navbar .navbar-extra a {
-        color: #fffff;
+        color: #fff;
         margin: 0 0.5rem;
       }
 
@@ -101,19 +94,17 @@
         color: var(--primary);
       }
 
-      #hamburger-menu {
-        display: none;
-      }
-
       /* Hero Section */
       .hero {
         min-height: 90vh;
         display: flex;
         align-items: center;
-        background-image: url("");
+        justify-content: center;
+        background-image: url("https://st3.depositphotos.com/5411610/15334/i/450/depositphotos_153344150-stock-photo-small-empty-shopping-cart.jpg");
         background-repeat: no-repeat;
         background-size: cover;
-        background-position: right;
+        background-position: center;
+        position: relative;
       }
 
       .hero::after {
@@ -132,15 +123,17 @@
 
       .hero .content {
         padding: 1.4rem 7%;
+        text-align: left;
         max-width: 60rem;
+        z-index: 10;
       }
 
       .hero .content h1 {
-        font-size: 3em;
-        color: #fff;
-        text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+        font-size: 3rem;
+        color: rgb(252, 249, 249);
+        text-shadow: 2px 2px 6px rgba(83, 92, 211, 0.7);
         line-height: 1.4;
-        margin-top: 1, 5rem;
+        margin-top: 1.5rem;
       }
 
       .hero .content h1 span {
@@ -161,10 +154,16 @@
         display: inline-block;
         padding: 1rem 3rem;
         font-size: 1.4rem;
-        color: #fff;
+        color: #f0f0f0;
         background-color: var(--primary);
         border-radius: 0.5rem;
         box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .hero .content .cta.hover {
+        background-color: darken(var(--primary), 10%);
       }
 
       /* About Section */
@@ -173,7 +172,7 @@
       }
 
       .about h2 {
-        text-align: center;
+        text-align: left;
         font-size: 2.6rem;
         margin-bottom: 3rem;
       }
@@ -196,12 +195,12 @@
 
       .about .row .content {
         flex: 1 1 35rem;
-        padding: 0 1 rem;
+        padding: 0 1rem;
       }
 
       .about .row .content h3 {
         font-size: 1.8rem;
-        margin-bottom: 1 rem;
+        margin-bottom: 1rem;
       }
 
       .about .row .content p {
@@ -211,58 +210,12 @@
         line-height: 1.6;
       }
 
-      /* Contact Section */
-      .contact .row {
-        display: flex;
-        margin-top: 2rem;
-        background-color: #222;
-      }
-
-      .contact .row .map {
-        flex: 1 1 45rem;
-        width: 100%;
-        object-fit: cover;
-      }
-
-      .contact .row form {
-        flex: 1 1 45rem;
-        padding: 5rem 2rem;
-        text-align: center;
-      }
-
-      .contact .row form .input-group {
-        display: flex;
-        align-items: center;
-        margin-top: 2rem;
-        background-color: var(--bg);
-        border: 1px solid #eee;
-        padding-left: 2rem;
-      }
-
-      .contact .row form .input-group input {
-        width: 100%;
-        padding: 2rem;
-        font-size: 1.7rem;
-        background: none;
-        color: #fff;
-      }
-
-      .contact .row form .btn {
-        margin-top: 3rem;
-        display: inline-block;
-        padding: 1rem 3rem;
-        font-size: 1.7rem;
-        color: #fff;
-        background-color: var(--primary);
-        cursor: pointer;
-      }
-
       /* Footer */
       footer {
-        background-color: var(--primary);
+        background-color: rgba(83, 92, 211, 0.7);
         text-align: center;
         padding: 1rem 0 3rem;
-        margin-top: 3rem;
+        margin-top: 4rem;
       }
 
       footer .socials {
@@ -280,7 +233,7 @@
       }
 
       footer .links {
-        margin-bottom: 1.4rem;
+        margin-bottom: 1.5rem;
       }
 
       footer .links a {
@@ -289,7 +242,7 @@
       }
 
       footer .credit {
-        font-size: 0.8rem;
+        font-size: 1.5rem;
       }
 
       footer .credit a {
@@ -299,7 +252,6 @@
 
       /* Media Queries */
 
-      /* Laptop */
       @media (max-width: 1366px) {
         html {
           font-size: 75%;
@@ -312,32 +264,29 @@
           font-size: 62.5%;
         }
 
-        #hamburger-menu {
-          display: inline-block;
-        }
+        .navbar-nav {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
 
-        .navbar .navbar-nav {
-          position: absolute;
-          top: 100%;
-          right: -100%;
-          background-color: #ffff;
-          width: 30rem;
-          height: 100vh;
-          transition: 0.3s;
-        }
+    .navbar-nav a {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 8px 12px;
+      background-color: #f0f0f1;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-        .navbar .navbar-nav.active {
-          right: 0;
-        }
-
-        .navbar .navbar-nav a {
-          color: #eee;
-          display: block;
-          margin: 1.5rem;
-          padding: 0.5rem;
-          font-size: 2rem;
-        }
-
+    .navbar-nav a:hover {
+      background-color: #f5f6f7;
+      transform: scale(1.05);
+    }
         .about .row {
           flex-wrap: wrap;
         }
@@ -353,12 +302,12 @@
         }
 
         .about .row .content h3 {
-          margin-top: 1rem;
-          font-size: 2rem;
+          margin-top: 2rem;
+          font-size: 1.6rem;
         }
 
         .about .row .content p {
-          font-size: 1.6rem;
+          font-size: 1.5rem;
         }
 
         .menu p {
@@ -389,17 +338,10 @@
   <body>
     <!-- Navbar Start -->
     <nav class="navbar">
-      <a href="#" class="navbar-logo">Toko<span>Senyum</span>.</a>
+      <a href="#" class="navbar-logo">Toko<span>Kita</span></a>
 
       <div class="navbar-nav">
-        <a href="#home">Home</a>
-        <a href="#about">Tentang kami</a>
-        <a href="#kontak">Kontak</a>
-        <a href="login.php">Login</a>
-      </div>
-
-      <div class="navbar-extra">
-        <a href="#" id="hamburger-menu"> <i data-feather="menu"></i></a>
+        <a href="login.html">Login</a>
       </div>
     </nav>
     <!-- Navbar End -->
@@ -429,57 +371,49 @@
       <div class="row">
         <div class="about-img">
           <img
-            src="https://images.unsplash.com/photo-1543281035-0577e8e7ba9f"
+            src="https://c8.alamy.com/comp/2DE6YJ7/icon-marcet-cart-on-tablet-in-the-hand-ordering-food-online-at-home-online-shopping-concept-tech-on-e-commerce-internet-shoping-concept-2DE6YJ7.jpg"
             alt="Tentang Kami"
           />
         </div>
         <div class="content">
-          <h3>Kenapa Memilih Toko Kami?</h3>
+          <h3><span>Kenapa Memilih Toko </span> Kami?</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga at,
-            iusto earum autem facilis eos.
-          </p>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio
-            cumque vel placeat error eius. Minima praesentium nemo consectetur
-            inventore! Odit!
+            "Belanja mudah, kualitas terjamin! Pilih TokoKita untuk pengalaman belanja terbaik."
+"Harga bersahabat, produk berkualitas. Toko kami, solusi kebutuhan Anda!"
+"Kami menawarkan lebih dari sekadar produk—pelayanan ramah dan kepuasan pelanggan adalah prioritas kami."
+"Nikmati diskon menarik dan produk terbaik hanya di TokoKita!"
+"Banyak pilihan, harga terbaik, dan pengiriman cepat—belanja di TokoKita sekarang juga!"
+"Kepercayaan Anda, kebanggaan kami. Pilih toko yang mengerti kebutuhan Anda!"
+"Karena Anda layak mendapatkan yang terbaik, kami hadir dengan kualitas dan pelayanan unggul."
+"Produk asli, harga pasti. Toko kami adalah pilihan cerdas untuk Anda."
+"Jaminan puas atau uang kembali! Belanja aman dan nyaman hanya di sini."
+"Dapatkan pengalaman belanja yang berbeda—lebih mudah, lebih cepat, lebih hemat!
           </p>
         </div>
       </div>
     </section>
     <!-- About Section end -->
 
-    <!-- Footer start -->
-    <footer>
-      <div class="socials">
-        <a href="#"><i data-feather="instagram"></i></a>
-        <a href="#"><i data-feather="twitter"></i></a>
-        <a href="#"><i data-feather="facebook"></i></a>
-      </div>
+ <!-- Footer start -->
+ <footer>
+  <div class="socials">
+    <a href="#"><i data-feather="instagram"></i></a>
+    <a href="#"><i data-feather="twitter"></i></a>
+    <a href="#"><i data-feather="facebook"></i></a>
+  </div>
 
-      <div class="links">
-        <a href="#home">Home</a>
-        <a href="#about">Tentang Kami</a>
-        <a href="#menu">Menu</a>
-        <a href="#contact">Kontak</a>
-      </div>
+  <div class="links">
+    <a href="#home">Home</a>
+    <a href="#about">Tentang Kami</a>
+    <a href="#menu">Menu</a>
+    <a href="#contact">Kontak</a>
+  </div>
 
-      <div class="credit">
-        <p>Design by <a href="#">YourName</a></p>
-      </div>
-    </footer>
-    <!-- Footer end   -->
+  <div class="credit">
+    <p>Design by <a href="#">YourName</a></p>
+  </div>
+  </footer>
+  <!-- Footer end -->
 
-    <!-- Javascript -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const hamburgerMenu = document.getElementById("hamburger-menu");
-        const navbarNav = document.querySelector(".navbar .navbar-nav");
-
-        hamburgerMenu.addEventListener("click", function () {
-          navbarNav.classList.toggle("active");
-        });
-      });
-    </script>
   </body>
 </html>
