@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        padding: 20px;
+      }
+      #checkout {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      #checkout h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      #checkout-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      #checkout-items li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      #total-price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      .info-section {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #555;
+      }
+      .file-upload {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .file-upload img {
+        max-width: 100%;
+        margin-top: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="checkout">
+      <h2>Checkout</h2>
+      <ul id="checkout-items"></ul>
+      <p id="total-price"></p>
+
+      <div class="form-group">
+        <label for="name">Nama Lengkap:</label>
+        <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" />
+      </div>
+      <div class="form-group">
+        <label for="address">Alamat Pengiriman:</label>
+        <textarea
+          id="address"
+          rows="4"
+          placeholder="Masukkan alamat lengkap Anda"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="customer-account">Nomor Rekening Anda:</label>
+        <input
+          type="text"
+          id="customer-account"
+          placeholder="Masukkan nomor rekening Anda"
+        />
+      </div>
+      <div class="info-section">
+        <p><strong>Nomor Rekening Pembayaran:</strong></p>
+        <p>Bank BCA: 1234567890 a.n. Toko Online</p>
+        <p>Bank Mandiri: 0987654321 a.n. Toko Online</p>
+      </div>
+
+      <div class="file-upload">
+        <label for="transfer-proof">Unggah Bukti Transfer:</label>
+        <input type="file" id="transfer-proof" accept="image/*" />
+        <img id="preview" alt="Preview Bukti Transfer" style="display: none;" />
+      </div>
+
+      <button onclick="finalizeOrder()">Selesaikan Pesanan</button>
+    </div>
+
+    <script>
+      // Format angka menjadi Rupiah
+      function formatRupiah(amount) {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+        }).format(amount);
+      }
+
+      function loadCheckout() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalPrice = parseInt(localStorage.getItem("totalPrice")) || 0;
+
+        const checkoutItems = document.getElementById("checkout-items");
+        const totalPriceElement = document.getElementById("total-price");
+
+        checkoutItems.innerHTML = "";
+        cart.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} - ${formatRupiah(item.price)}`;
+          checkoutItems.appendChild(li);
+        });
+
+        totalPriceElement.textContent = `Total Harga: ${formatRupiah(totalPrice)}`;
+      }
+
+      function finalizeOrder() {
+        const name = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const customerAccount = document
+          .getElementById("customer-account")
+          .value.trim();
+        const transferProof = document.getElementById("transfer-proof").files[0];
+        const totalPrice = document.getElementById("total-price").textContent;
+
+        if (!name || !address || !customerAccount) {
+          alert("Harap isi semua data (Nama, Alamat, dan Nomor Rekening).");
+          return;
+        }
+
+        if (!transferProof) {
+          alert("Harap unggah bukti transfer.");
+          return;
+        }
+
+        const confirmation = confirm(
+          `Detail Pesanan Anda:\n\nNama: ${name}\nAlamat: ${address}\nNomor Rekening Anda: ${customerAccount}\n${totalPrice}\n\nKlik OK untuk menyelesaikan pesanan.`
+        );
+        if (!confirmation) return;
+
+        alert(
+          "Pesanan berhasil diselesaikan! Silakan lakukan pembayaran sesuai nomor rekening yang tertera."
+        );
+
+        // Hapus data dari localStorage
+        localStorage.removeItem("cart");
+        localStorage.removeItem("totalPrice");
+
+        // Redirect ke halaman utama
+        window.location.href = "terimakasih.html";
+      }
+
+      document
+        .getElementById("transfer-proof")
+        .addEventListener("change", function () {
+          const file = this.files[0];
+          if (file && file.type.startsWith("image/") && file.size <= 2 * 1024 * 1024) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const preview = document.getElementById("preview");
+              preview.src = e.target.result;
+              preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+          } else {
+            alert("Harap unggah file gambar dengan ukuran maksimal 2MB.");
+            this.value = ""; // Reset input file
+          }
+        });
+
+      loadCheckout();
+    </script>
+  </body>
+</html>
