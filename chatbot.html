@@ -26,7 +26,7 @@
       }
 
       .chatbox-header {
-        background-color: #4caf50;
+        background-color: #3224bd;
         color: white;
         padding: 10px;
         border-top-left-radius: 10px;
@@ -122,21 +122,21 @@
 
       function generateBotResponse(userMessage) {
         let botResponse = "Maaf, saya tidak mengerti.";
-        if (userMessage.toLowerCase().includes("halo,hallo")) {
+        if (userMessage.toLowerCase().includes("halo")) {
           botResponse = "Halo! Ada yang bisa saya bantu?";
         } else if (userMessage.toLowerCase().includes("apa kabar")) {
           botResponse = "Saya baik, terima kasih! Bagaimana dengan Anda?";
-        } else if (userMessage.toLowerCase().includes("apakah kamu mengenal ferdinan")) {
-          botResponse = "oh saya kenal dia ";
-        } else if (userMessage.toLowerCase().includes("wandari")) {
-          botResponse = "hahahahahaha roa ?";
-        } else if (userMessage.toLowerCase().includes("ferdinan")) {
-          botResponse = "ommak ganteng nai ?";
-        } else if (userMessage.toLowerCase().includes("oppung")) {
-          botResponse = "apakah dia orang tua ?";
+        } else if (userMessage.toLowerCase().includes("siapa kamu")) {
+          botResponse = "saya adalah spiderman";
+        } else if (userMessage.toLowerCase().includes("apa saja yang ada di toko mu")) {
+          botResponse = "lihat aja sendiri";
+        } else if (userMessage.toLowerCase().includes("baik")) {
+          botResponse = "oke";
+        } else if (userMessage.toLowerCase().includes("apakah kamu mengenalku")) {
+          botResponse = "maaaf. tidak sama sekali";
         }
-        else if (userMessage.toLowerCase().includes("oppung")) {
-          botResponse = "apakah dia orang tua ?";
+        else if (userMessage.toLowerCase().includes("terima kasih")) {
+          botResponse = "sama sama, senang bertemu dengan anda";
         }
         setTimeout(function () {
           displayMessage(botResponse, "bot");
